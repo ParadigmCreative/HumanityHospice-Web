@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+
+    <title>Nurse Portal</title>
+</head>
+
+<body>
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <button class="btn btn-outline-light float-right" id="signout">Sign Out</button>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="text-center d-block mb-4 h-100">
+                            <img src="" alt="" class="rounded img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-12 text-center">
+                        <h2 class="display-4">Humanity Connect</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <a class="btn-link" href="nurseportal.html">Portal Home</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl col-lg col-md col-sm">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="row">
+                            <div class="col">
+                                <div class="jumbotron m-3">
+                                    <h1 class="display-4" id="nurse-name"></h1>
+                                    <p class="lead">
+                                        <b>Facetime:</b> <span id="nurse-facetime"></span> <br>
+                                        <b>Google Hangout:</b> <span id="nurse-hangout"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="">
+                                    <button class="btn btn-purple float-right" id="assign-patient-btn" data-toggle="modal"
+                                        data-target="#assign-patient-popup">Assign Patient</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <table class="table" id="patient-list">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="assign-patient-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Assign Patient</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="patient-select">Team Select</label>
+                            <select class="form-control" id="patient-select">
+
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="submit-assign-patient" class="btn btn-primary" data-dismiss="modal">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="patientlisting.js"></script>
+
+
+
+</body>
+
+</html>

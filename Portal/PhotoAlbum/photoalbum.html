@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../style.css">
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <title>Humanity Connect</title>
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
+        <script>
+          $(document).ready(function() {
+            var width = $(document).width();
+            if(width < 576) {
+                $("#menu-btn-mobile").click();
+            } else {
+                var sidebar = $("#sidebarmenu");
+                sidebar.addClass("show");
+            }
+        });
+
+    </script>
+
+        <div class="row mb-3">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <button type="button" id="menu-btn-mobile" class="btn btn-outline-light btn-hideable float-right" data-toggle="collapse" data-target="#sidebarmenu">Close</button>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="text-center d-block mb-4 h-100">
+              <img id="Reader-Profile-Picture" src="" alt="" class="rounded img-fluid">
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-md-12 text-center">
+            <h4 id="reader-name"></h4>
+            <h6 id="reader-email"></h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="journal.php">Journal</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="encouragementboard.php">Encouragement Board</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="photoalbum.php">Photo Album</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="http://www.humanityhospice.com">About</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="switchpatients.php">Switch Patients</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <a class="btn-link" href="../Logout/logout.php">Sign Out</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 m-3">
+        <!--				Menu Button				-->
+        <div class="row mb-3">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-md btn-purple" data-toggle="collapse" data-target="#sidebarmenu">Menu</button>
+          </div>
+        </div>
+
+        <!--				Jumbotron				-->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="jumbotron">
+              <h3 class="display-4 text-center">
+                <span id="patientName">Luke Davis</span>'s Photo Album
+              </h3>
+
+            </div>
+          </div>
+        </div>
+
+        <!--				Content					-->
+        <div class="row">
+          <div class="col">
+            <div id="photo-album">
+              <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                  <div class="text-center d-block mb-4 h-100"><img src="https://via.placeholder.com/200x200" alt="" class="rounded img-fluid"></div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                  <div class="text-center d-block mb-4 h-100"><img src="https://via.placeholder.com/200x200" alt="" class="rounded img-fluid"></div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                  <div class="text-center d-block mb-4 h-100"><img src="https://via.placeholder.com/200x200" alt="" class="rounded img-fluid"></div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                  <div class="text-center d-block mb-4 h-100"><img src="https://via.placeholder.com/200x200" alt="" class="rounded img-fluid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+
+  <!-- Firebase App is always required and must be first -->
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+
+  <!-- Add additional services that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-storage.js"></script>
+  <script src="photoalbum.js"></script>
+
+
+
+</body>
+
+</html>

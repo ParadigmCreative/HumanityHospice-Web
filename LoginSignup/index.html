@@ -1,0 +1,80 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+
+    <title>Humanity Connect</title>
+  </head>
+  <body class="text-center">
+
+
+
+    <div class="form-signin mt-5">
+        <div class="row">
+            <div class="col">
+                <img class="mb-5" src="../img/LOGO2.png">
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required="true" autofocus="">
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required="true">
+            </div>
+        </div>
+
+        <div id="invalid-text" class="invalid-feedback text-left">
+                Please enter patient's invite code
+        </div>
+
+        <div class="row">
+            <div class="col-sm">
+                <button class="btn btn-lg btn-block btn-purple" id="signin-btn">Login</button>
+            </div>
+        </div>
+
+        <div class="row my-5">
+            <div class="col text-center">
+                <a href="signup.html" style="color: #7572C1;">Don't have an account? Signup</a>
+            </div>
+        </div>
+
+        <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <!-- Firebase App is always required and must be first -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-storage.js"></script>
+    <script src="authe.js"></script>
+
+
+  </body>
+</html>

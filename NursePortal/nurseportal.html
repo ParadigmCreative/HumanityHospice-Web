@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+
+    <title>Nurse Portal</title>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
+
+                <img src="../img/white-flower.png" style="height: 50pt; width: 50pt;" alt="Flower">
+
+
+                <div> class="row mt-4 mb-5">
+                    <div class="col-md-12 text-left">
+                        <h2 class="" style="font-weight:100; font-size: 2.5rem;">Nurse Portal</h2>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="row">
+                            <div class="col mb-3">
+                                <a class="btn-link" href="nurseportal.html">Portal Home</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <button class="btn btn-outline-light btn-lg btn-block" id="signout">Sign Out</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="col-xl-10 col-lg-9 col-md-9 col-sm">
+                <div class="row m-3">
+                    <div class="col-xl-12">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="">
+                                    <h1 class="display-3" style="font-weight:700;">Home</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-3">
+                            <div class="col">
+                                <div class="">
+                                    <button class="btn btn-purple float-right" id="add-nurse-btn" data-toggle="modal"
+                                        data-target="#add-nurse-popup">Add Nurse</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <table class="table" id="Nurse-Table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>On Call</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add-nurse-popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Add Nurse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="n-first-name">First Name</label>
+                                    <input type="text" id="n-first-name" class="form-control" placeholder="First name">
+                                </div>
+                                <div class="col">
+                                    <label for="n-last-name">First Name</label>
+                                    <input type="text" id="n-last-name" class="form-control" placeholder="Last name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Facetime ID</label>
+                            <input type="email" class="form-control" id="n-facetime" placeholder="example@gmail.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Google Hangout ID</label>
+                            <input type="email" class="form-control" id="n-hangout" placeholder="example@gmail.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="team-select">Team Select</label>
+                            <select class="form-control" id="team-select">
+                                <option>Guthrie</option>
+                                <option>Edmond</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="submit-create-nurse" class="btn btn-purple" data-dismiss="modal">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <!-- Firebase App is always required and must be first -->
+    
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-storage.js"></script>
+
+    <script src="FirebaseHandler.js"></script>
+    <script src="nurseportal.js"></script>
+
+
+</body>
+
+</html>
