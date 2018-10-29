@@ -130,10 +130,10 @@ function addPostRow(postData) {
   row.setAttribute('id', 'post-item-row');
 
   var leftData = document.createElement('div');
-  leftData.setAttribute('class', 'col-xl-1 col-lg-1 col-md-2 col-sm-3 col-4 mb-4');
+  leftData.setAttribute('class', 'col-lg-2 col-md-3 col-sm-3 col-xs-4 mb-4');
 
   var rightData = document.createElement('div');
-  rightData.setAttribute('class', 'col-xl-11 col-lg-10 col-md-9 col-sm-9 col');
+  rightData.setAttribute('class', 'col-lg-10 col-md-9 col-sm-9 col-xs-12');
 
   var img = document.createElement('img');
   img.setAttribute('src', "../../img/Logo.png");
@@ -169,7 +169,7 @@ function addPostRow(postData) {
     img.setAttribute('style', 'max-width: 400px');
 
     var col = document.createElement('div');
-    col.setAttribute('class', 'col');
+    col.setAttribute('class', 'col-xs-10 p-4');
     col.appendChild(img);
 
     var pimagerow = document.createElement('div');
@@ -281,27 +281,6 @@ function addPostRow(postData) {
 
 function createComment(commentData) {
 
-  var comment = document.createElement('div');
-  comment.id = "comment";
-  var commentMainRow = document.createElement('div');
-  commentMainRow.className = "row";
-  var commentImgCol = document.createElement('div');
-  commentImgCol.className = "col-lg-1";
-  var commentImg = document.createElement('img');
-  commentImg.setAttribute('src', '../../img/Logo.png');
-  var commentDataCol = document.createElement('div');
-  commentDataCol.className = "col-lg-10";
-  var commentDataRowTop = document.createElement('div');
-  commentDataRowTop.className = "row";
-  var commentDataTopCol = document.createElement('div');
-  commentDataTopCol.className = "col";
-  var commentDataTopH4 = document.createElement('h4');
-  commentDataTopH4.id = "commenter-name";
-  commentDataTopH4.innerHTML = commentData.PosterName;
-  var commentDataTopCol2 = document.createElement('div');
-  commentDataTopCol2.className = "col text-right";
-  var commentDataTopH6 = document.createElement('h6');
-  commentDataTopH6.id = "timestamp";
   var d = new Date(commentData.Timestamp * 1000);
   var options = {
     weekday: 'long',
@@ -315,40 +294,92 @@ function createComment(commentData) {
     minute: '2-digit'
   });
 
-  commentDataTopH6.innerHTML = tm + " - " + dt;
-  var commentDataRowBottom = document.createElement('div');
-  commentDataRowBottom.className = "row";
-  var commentDataBottomCol = document.createElement('div');
-  commentDataBottomCol.className = "col";
-  var commentDataBottomPost = document.createElement('p');
-  commentDataBottomPost.id = "comment-post";
-  commentDataBottomPost.innerHTML = commentData.Comment;
-  var commentSepRow = document.createElement('div');
-  var commentSepCol = document.createElement('div');
-  var commentSep = document.createElement('hr');
-  commentSep.setAttribute('class', 'my-3');
+  var template = `
+    <div class="row">
+      <div class = "col-lg-2 col-md-2 col-sm-2 col-xs">
+        <img class="img-fluid" src = "../../img/Logo.png" style="max-height: 300px;">
+      </div> 
 
-  commentImgCol.appendChild(commentImg);
-  commentMainRow.appendChild(commentImgCol);
+      <div class="col-lg-6 col-sm-6 col-sm-6 col-xs-10">
+        <h4 id="commenter-name">${commentData.PosterName}</h4> 
+      </div> 
+      
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <h6 id="timestamp">${tm + " - " + dt}</h6> 
+      </div> 
 
-  commentDataTopCol.appendChild(commentDataTopH4);
-  commentDataRowTop.appendChild(commentDataTopCol);
-  commentDataCol.appendChild(commentDataRowTop);
+      <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12 my-4">
+        <p id="comment-post">${commentData.Comment}</p> 
+      </div> 
+    </div> 
+    <div>
+      <div>
+        <hr class="my-3">
+      </div> 
+    </div>
+  `
 
-  commentDataTopCol2.appendChild(commentDataTopH6);
-  commentDataRowTop.appendChild(commentDataTopCol2);
+  var comment = document.createElement('div');
+  comment.id = "comment";
+  // var commentMainRow = document.createElement('div');
+  // commentMainRow.className = "row";
+  // var commentImgCol = document.createElement('div');
+  // commentImgCol.className = "col-lg-1 col-sm-2 col-xs-3";
+  // var commentImg = document.createElement('img');
+  // commentImg.setAttribute('src', '../../img/Logo.png');
+  // var commentDataCol = document.createElement('div');
+  // commentDataCol.className = "col-lg-10 col-sm-10 col-xs-9";
+  // var commentDataRowTop = document.createElement('div');
+  // commentDataRowTop.className = "row";
+  // var commentDataTopCol = document.createElement('div');
+  // commentDataTopCol.className = "col-xs-6";
+  // var commentDataTopH4 = document.createElement('h4');
+  // commentDataTopH4.id = "commenter-name";
+  // commentDataTopH4.innerHTML = commentData.PosterName;
+  // var commentDataTopCol2 = document.createElement('div');
+  // commentDataTopCol2.className = "col text-right";
+  // var commentDataTopH6 = document.createElement('h6');
+  // commentDataTopH6.id = "timestamp";
+  
 
-  commentDataBottomCol.appendChild(commentDataBottomPost);
-  commentDataRowBottom.appendChild(commentDataBottomCol);
-  commentDataCol.appendChild(commentDataRowBottom);
+  // commentDataTopH6.innerHTML = tm + " - " + dt;
+  // var commentDataRowBottom = document.createElement('div');
+  // commentDataRowBottom.className = "row";
+  // var commentDataBottomCol = document.createElement('div');
+  // commentDataBottomCol.className = "col";
+  // var commentDataBottomPost = document.createElement('p');
+  // commentDataBottomPost.id = "comment-post";
+  // commentDataBottomPost.innerHTML = commentData.Comment;
+  // var commentSepRow = document.createElement('div');
+  // var commentSepCol = document.createElement('div');
+  // var commentSep = document.createElement('hr');
+  // commentSep.setAttribute('class', 'my-3');
 
-  commentMainRow.appendChild(commentDataCol);
+  // commentImgCol.appendChild(commentImg);
+  // commentMainRow.appendChild(commentImgCol);
 
-  commentSepCol.appendChild(commentSep);
-  commentSepRow.appendChild(commentSepCol);
+  // commentDataTopCol.appendChild(commentDataTopH4);
+  // commentDataRowTop.appendChild(commentDataTopCol);
+  // commentDataCol.appendChild(commentDataRowTop);
 
-  comment.appendChild(commentMainRow);
-  comment.appendChild(commentSepRow);
+  // commentDataTopCol2.appendChild(commentDataTopH6);
+  // commentDataRowTop.appendChild(commentDataTopCol2);
+
+  // commentDataBottomCol.appendChild(commentDataBottomPost);
+  // commentDataRowBottom.appendChild(commentDataBottomCol);
+  // commentDataCol.appendChild(commentDataRowBottom);
+
+  // commentMainRow.appendChild(commentDataCol);
+
+  // commentSepCol.appendChild(commentSep);
+  // commentSepRow.appendChild(commentSepCol);
+
+  // comment.appendChild(commentMainRow);
+  // comment.appendChild(commentSepRow);
+
+  comment.innerHTML = template;
+
+
 
   return comment;
 
