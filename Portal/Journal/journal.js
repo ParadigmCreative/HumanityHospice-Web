@@ -45,7 +45,7 @@ var firebaseReader;
       var patient = firebase.database().ref().child("Patients");
       patient.child(fbuser.ReadingFrom).once('value').then(function(snap) {
         var patientData = snap.val();
-        $("span#patientName").text(patientData.FullName);
+        $("span#patientName").text(patientData.FullName + " Journal");
 
       });
 

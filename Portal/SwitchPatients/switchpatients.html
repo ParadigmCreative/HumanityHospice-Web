@@ -9,10 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="../../style.css">
-  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../../css/style.css">
 
   <title>Humanity Connect</title>
 </head>
@@ -23,18 +20,6 @@
     <div class="row">
 
       <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
-        <script>
-          $(document).ready(function() {
-            var width = $(document).width();
-            if(width < 576) {
-                $("#menu-btn-mobile").click();
-            } else {
-                var sidebar = $("#sidebarmenu");
-                sidebar.addClass("show");
-            }
-        });
-
-    </script>
 
         <div class="row mb-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -97,7 +82,7 @@
       <div class="col-xl col-lg col-md col-sm m-3">
         <div class="row mb-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <button type="button" class="btn btn-purple" data-toggle="collapse" data-target="#sidebarmenu">
+            <button type="button" class="btn btn-purple btn-hideable" data-toggle="collapse" data-target="#sidebarmenu">
               <a href="#sidebarmenu" style="text-decoration: none; color: white;">Menu</a>
             </button>
           </div>
@@ -112,6 +97,14 @@
             </div>
           </div>
         </div>
+
+        <div class="row my-3">
+          <div class="col">
+            <button class="btn btn-purple float-right" data-toggle="modal" data-target="#PatientCodeModel">Follow
+              A Patient</button>
+          </div>
+        </div>
+
         <div class="row">
           <div class="col-xl col-lg col-md col-sm">
             <div class="table-responsive-md">
@@ -122,15 +115,9 @@
                     <th>Selection</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="patientListBody">
                   <tr>
                     <td>Forrest Hull</td>
-                    <td>
-                      <button class="btn btn-purple">Select</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Luke Davis</td>
                     <td>
                       <button class="btn btn-purple">Select</button>
                     </td>
@@ -142,7 +129,34 @@
         </div>
       </div>
 
+    </div>
+  </div>
 
+
+  <!-- Modal -->
+  <div class="modal fade" id="PatientCodeModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Enter Patient Invite Code</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" id="patientCode" placeholder="Invite Code">
+          <div id="invalid-text" class="invalid-feedback text-left">
+            Please enter patient's invite code
+          </div>
+          <div id="spinner" class="mx-auto my-3"></div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="followPatient">Submit</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -156,7 +170,6 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
 
   <!-- Firebase App is always required and must be first -->
 
@@ -166,10 +179,8 @@
   <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-storage.js"></script>
-  <script src="../LoginSignup/authe.js"></script>
-  <script src="../LoginSignup/signup.js"></script>
-  <script src="journal.js"></script>
-  <script src="encboard.js"></script>
+
+  <script src="switchpatients.js"></script>
 
 
 
