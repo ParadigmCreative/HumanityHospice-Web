@@ -190,6 +190,7 @@ hr {
     color: white;
     background: none;
     font-weight: bold;
+    font-size: larger;
 }
 
 .signinup {
@@ -209,3 +210,23 @@ hr {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+.timestamp-font {
+    font-family: 'HelveticaNeue';
+    font-weight: lighter;
+}
+
+
+.helvetica-light {
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+

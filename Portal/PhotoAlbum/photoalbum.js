@@ -56,9 +56,12 @@
         var profilePics = firebase.storage().ref().child("ProfilePictures");
         var imageRef = profilePics.child(user.uid).child('ProfilePicture.png');
         imageRef.getDownloadURL().then(function (url) {
-            $("#Reader-Profile-Picture").setAttribute('src', url);
+            $("#Reader-Profile-Picture").attr('src', url);
+            currentUserProfilePictureURL = url;
         }).catch(function (error) {
 
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
             switch (error.code) {
                 case 'storage/object-not-found':
                     // File doesn't exist
@@ -113,12 +116,22 @@ function createPhotoCol(photoURL) {
     col.setAttribute('class', 'col-lg-3 col-md-4 col-sm-4 col-xs-12');
     const template = `
         <div class = "text-center d-block mb-4 h-100" >
-            <img src = "${photoURL}" alt = "" class = "rounded img-fluid">
+            <img id="photoalbumpost" data-toggle="modal" data-target="#imagemodal" src = "${photoURL}" alt = "" class="rounded img-fluid" style="max-height: 300px; max-width: 300px;">
         </div> 
     `
 
     col.innerHTML = template;
     var posts = document.getElementById('photoAlbumRow');
     posts.appendChild(col);
+
+    var img = document.getElementById('photoalbumpost');
+    // img.addEventListener('click', function () {
+        
+    //     var ClickTemplate = `<img src="${img.src}" id="imagePreview" class="img-fluid">`
+
+    //     var area = document.getElementById('modalArea');
+    //     area.innerHTML = ClickTemplate;
+
+    // });
 
 }

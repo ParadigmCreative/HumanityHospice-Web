@@ -19,7 +19,7 @@
   <div class="container-fluid">
     <div class="row">
 
-      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
+      <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
 
         <div class="row mb-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -30,16 +30,16 @@
 
         <div class="row mb-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="text-center d-block mb-4 h-100">
-              <img id="Reader-Profile-Picture" src="" alt="" class="rounded img-fluid">
+            <div class="text-center d-block mb-4">
+              <img id="Reader-Profile-Picture" src="" alt="" class="rounded img-fluid" style="max-height: 300px;">
             </div>
           </div>
         </div>
 
         <div class="row mb-5">
           <div class="col-md-12 text-center">
-            <h4 id="reader-name"></h4>
-            <h6 id="reader-email"></h6>
+            <h4 id="reader-name" class="helvetica-light"></h4>
+            <h6 id="reader-email" class="helvetica-light"></h6>
           </div>
         </div>
 
@@ -63,7 +63,7 @@
             </div>
             <div class="row">
               <div class="col mb-3">
-                <a class="btn-link" href="http://www.humanityhospice.com">About</a>
+                <a class="btn-link" href="http://www.humanityhospice.com">Humanity Hospice</a>
               </div>
             </div>
             <div class="row">
@@ -82,7 +82,7 @@
       </div>
 
 
-      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+      <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
         <div class="row my-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
             <button type="button" class="btn btn-purple btn-hideable .d-block .d-sm-none" data-toggle="collapse"
@@ -92,45 +92,30 @@
           </div>
         </div>
 
-        <div class="row my-3">
+        <div class="row my-2 sticky-top py-3" style="background-color: white;">
           <div class="col">
-            <h2 class="text-left">
-              <span id="patientName"></span>
-            </h2>
+            <div class="my-5">
+              <h3 class="display-4 text-left">
+                <span id="patientName"></span>
+              </h3>
+            </div>
           </div>
         </div>
-        
 
-        <div id="posts">
 
-          <!-- <div id="comment">
-            <div class="row">
-              <div class="col-lg-2 col-xs-3">
-                <img src="../../img/Logo.png">
-              </div>
-              <div class="col-lg-8 col-xs-9">
-                <h4 id="commenter-name">Final Test reader Android</h4>
-              </div>
-              <div class="col-lg-2 col-xs-12 text-right">
-                <h6 id="timestamp">12:04 PM - Friday, October 26, 2018</h6>
-              </div>
-              <div class="col-lg-12 offset-lg-10 col-xs-12">
-                <p id="comment-post">testing 1234</p>
-              </div>
-            </div>
-            <div>
-              <div>
-                <hr class="my-3">
-              </div>
-            </div>
-          </div> -->
+        <div id="posts" class="p-3">
+
 
         </div>
       </div>
+    </div>
+  </div>
 
-
-
-
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <img src="" id="imagePreview" class="img-fluid">
+      </div>
     </div>
   </div>
 

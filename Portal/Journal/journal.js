@@ -1,4 +1,5 @@
 var firebaseReader;
+var currentUserProfilePictureURL;
 
 (function() {
 
@@ -56,7 +57,8 @@ var firebaseReader;
     var profilePics = firebase.storage().ref().child("ProfilePictures");
     var imageRef = profilePics.child(user.uid).child('ProfilePicture.png');
     imageRef.getDownloadURL().then(function(url) {
-      $("#Reader-Profile-Picture").setAttribute('src', url);
+      $("#Reader-Profile-Picture").attr('src', url);
+      currentUserProfilePictureURL = url;
     }).catch(function(error) {
 
       // A full list of error codes is available at
@@ -97,9 +99,14 @@ function getPosts(pid) {
       var postData = {
         key: postSnap.key,
         PatientName: data.PatientName,
+        PID: pid,
         Post: data.Post,
         Timestamp: data.Timestamp
       };
+
+      if (data.PostImageURL != null) {
+        postData["PostImageURL"] = data.PostImageURL;
+      }
 
       var commentData = data.Comments;
       if (commentData != null) {
@@ -111,13 +118,9 @@ function getPosts(pid) {
           postData.Comments.push(item);
         });
       }
-
-      if (data.PostImageURL != null) {
-        postData["PostImageURL"] = data.PostImageURL;
-      }
-
-
+      
       addPostRow(postData);
+
     });
   });
 }
@@ -130,15 +133,24 @@ function addPostRow(postData) {
   row.setAttribute('id', 'post-item-row');
 
   var leftData = document.createElement('div');
-  leftData.setAttribute('class', 'col-lg-2 col-md-3 col-sm-3 col-xs-4 mb-4');
+  leftData.setAttribute('class', 'col-lg-1 col-md-3 col-sm-3 col-xs-4 mb-4');
 
   var rightData = document.createElement('div');
-  rightData.setAttribute('class', 'col-lg-10 col-md-9 col-sm-9 col-xs-12');
+  rightData.setAttribute('class', 'col-lg-11 col-md-9 col-sm-9 col-xs-12');
 
-  var img = document.createElement('img');
-  img.setAttribute('src', "../../img/Logo.png");
-  img.setAttribute('class', 'rounded, img-fluid');
-  leftData.appendChild(img);
+  var profImg = document.createElement('img');
+
+  firebase.database().ref().child('ProfilePictures').child(postData.PID).once('value').then(function (snap) {
+    var url = snap.val();
+    if (url) {
+      profImg.setAttribute('src', url);
+    } else {
+      profImg.setAttribute('src', "../../img/Logo.png");
+    }
+  });
+
+  profImg.setAttribute('class', 'rounded, img-fluid');
+  leftData.appendChild(profImg);
 
   var nameRow = document.createElement('div');
   nameRow.setAttribute('class', 'row');
@@ -161,25 +173,6 @@ function addPostRow(postData) {
 
   rightData.appendChild(nameRow);
 
-  if (postData.PostImageURL != null) {
-    var img = document.createElement('img');
-    img.setAttribute('class', 'img-fluid rounded mx-auto');
-    img.id = "post-picture";
-    img.setAttribute('src', postData.PostImageURL);
-    img.setAttribute('style', 'max-width: 400px');
-
-    var col = document.createElement('div');
-    col.setAttribute('class', 'col-xs-10 p-4');
-    col.appendChild(img);
-
-    var pimagerow = document.createElement('div');
-    pimagerow.setAttribute('class', 'row my-3');
-    pimagerow.appendChild(col);
-
-    rightData.appendChild(pimagerow);
-
-  }
-
 
 
   var messageRow = document.createElement('div');
@@ -194,6 +187,30 @@ function addPostRow(postData) {
   messageRow.appendChild(messageCol);
   rightData.appendChild(messageRow);
 
+
+  if (postData.PostImageURL != null) {
+    var img = document.createElement('img');
+    img.setAttribute('class', 'img-fluid rounded mx-auto');
+    img.id = "post-picture";
+    img.setAttribute('src', postData.PostImageURL);
+    img.setAttribute('style', 'max-width: 300px; max-height: 300px;');
+    img.setAttribute('data-toggle', 'modal');
+    img.setAttribute('data-target', '#imagemodal');
+    img.addEventListener('click', function () {
+      var preview = $('#imagePreview');
+      preview.attr('src', img.src);
+    });
+
+    var col = document.createElement('div');
+    col.setAttribute('class', 'col-xs-10 p-4');
+    col.appendChild(img);
+
+    var pimagerow = document.createElement('div');
+    pimagerow.setAttribute('class', 'row my-3');
+    pimagerow.appendChild(col);
+
+    rightData.appendChild(pimagerow);
+  }
 
 
   //    aefasdfasdf
@@ -220,36 +237,54 @@ function addPostRow(postData) {
 
   rightData.appendChild(commentsRow);
 
+  var inputTemplate = `
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <textarea id="new-comment" class="form-control" type="text" placeholder="Write your comment here..."></textarea> 
+        </div> 
+      </div> 
+      <div class="row my-3">
+        <div class="col-auto">
+          <button class="btn btn-purple" onclick="addComment(${postData.key})"> Post! </button> 
+        </div> 
+      </div> 
+    </div>
+  `
+
   var inputRow = document.createElement('div');
   inputRow.setAttribute('class', 'row my-3');
-  var inputCol1 = document.createElement('div');
-  inputCol1.setAttribute('class', 'col-auto');
-  var inputButton = document.createElement('button');
-  inputButton.setAttribute('class', 'btn btn-purple');
-  inputButton.innerHTML = "Post!";
 
-  inputButton.addEventListener('click', function() {
-    var comText = document.getElementById('new-comment').value;
-    addComment(postData.key, comText);
-  });
+  inputRow.innerHTML = inputTemplate;
 
-  var inputCol2 = document.createElement('div');
-  inputCol2.setAttribute('class', 'col');
-  var inputGroup = document.createElement('div');
-  inputGroup.setAttribute('class', 'input-group');
-  var input = document.createElement('textarea');
-  input.setAttribute('class', 'form-control');
-  input.setAttribute('type', 'text');
-  input.setAttribute('id', 'new-comment');
-  input.setAttribute('placeholder', 'Write your comment here...');
+  // var inputCol1 = document.createElement('div');
+  // inputCol1.setAttribute('class', 'col-auto');
+  // var inputButton = document.createElement('button');
+  // inputButton.setAttribute('class', 'btn btn-purple');
+  // inputButton.innerHTML = "Post!";
+
+  // inputButton.addEventListener('click', function() {
+  //   var comText = document.getElementById('new-comment').value;
+  //   addComment(postData.key, comText);
+  // });
+
+  // var inputCol2 = document.createElement('div');
+  // inputCol2.setAttribute('class', 'col');
+  // var inputGroup = document.createElement('div');
+  // inputGroup.setAttribute('class', 'input-group');
+  // var input = document.createElement('textarea');
+  // input.setAttribute('class', 'form-control');
+  // input.setAttribute('type', 'text');
+  // input.setAttribute('id', 'new-comment');
+  // input.setAttribute('placeholder', 'Write your comment here...');
 
 
-  inputCol1.appendChild(inputButton);
-  inputRow.appendChild(inputCol1);
+  // inputCol1.appendChild(inputButton);
+  // inputRow.appendChild(inputCol1);
 
-  inputGroup.appendChild(input);
-  inputCol2.appendChild(inputGroup);
-  inputRow.appendChild(inputCol2);
+  // inputGroup.appendChild(input);
+  // inputCol2.appendChild(inputGroup);
+  // inputRow.appendChild(inputCol2);
 
   rightData.appendChild(inputRow);
 
@@ -296,16 +331,16 @@ function createComment(commentData) {
 
   var template = `
     <div class="row">
-      <div class = "col-lg-2 col-md-2 col-sm-2 col-xs">
+      <div class = "col-lg-1 col-md-2 col-sm-2 col-xs">
         <img class="img-fluid" src = "../../img/Logo.png" style="max-height: 300px;">
       </div> 
 
-      <div class="col-lg-6 col-sm-6 col-sm-6 col-xs-10">
+      <div class="col-lg-7 col-sm-6 col-sm-6 col-xs-10">
         <h4 id="commenter-name">${commentData.PosterName}</h4> 
       </div> 
       
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <h6 id="timestamp">${tm + " - " + dt}</h6> 
+        <hp id="timestamp" class="timestamp-font">${tm + " - " + dt}</hp> 
       </div> 
 
       <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12 my-4">
@@ -321,61 +356,6 @@ function createComment(commentData) {
 
   var comment = document.createElement('div');
   comment.id = "comment";
-  // var commentMainRow = document.createElement('div');
-  // commentMainRow.className = "row";
-  // var commentImgCol = document.createElement('div');
-  // commentImgCol.className = "col-lg-1 col-sm-2 col-xs-3";
-  // var commentImg = document.createElement('img');
-  // commentImg.setAttribute('src', '../../img/Logo.png');
-  // var commentDataCol = document.createElement('div');
-  // commentDataCol.className = "col-lg-10 col-sm-10 col-xs-9";
-  // var commentDataRowTop = document.createElement('div');
-  // commentDataRowTop.className = "row";
-  // var commentDataTopCol = document.createElement('div');
-  // commentDataTopCol.className = "col-xs-6";
-  // var commentDataTopH4 = document.createElement('h4');
-  // commentDataTopH4.id = "commenter-name";
-  // commentDataTopH4.innerHTML = commentData.PosterName;
-  // var commentDataTopCol2 = document.createElement('div');
-  // commentDataTopCol2.className = "col text-right";
-  // var commentDataTopH6 = document.createElement('h6');
-  // commentDataTopH6.id = "timestamp";
-  
-
-  // commentDataTopH6.innerHTML = tm + " - " + dt;
-  // var commentDataRowBottom = document.createElement('div');
-  // commentDataRowBottom.className = "row";
-  // var commentDataBottomCol = document.createElement('div');
-  // commentDataBottomCol.className = "col";
-  // var commentDataBottomPost = document.createElement('p');
-  // commentDataBottomPost.id = "comment-post";
-  // commentDataBottomPost.innerHTML = commentData.Comment;
-  // var commentSepRow = document.createElement('div');
-  // var commentSepCol = document.createElement('div');
-  // var commentSep = document.createElement('hr');
-  // commentSep.setAttribute('class', 'my-3');
-
-  // commentImgCol.appendChild(commentImg);
-  // commentMainRow.appendChild(commentImgCol);
-
-  // commentDataTopCol.appendChild(commentDataTopH4);
-  // commentDataRowTop.appendChild(commentDataTopCol);
-  // commentDataCol.appendChild(commentDataRowTop);
-
-  // commentDataTopCol2.appendChild(commentDataTopH6);
-  // commentDataRowTop.appendChild(commentDataTopCol2);
-
-  // commentDataBottomCol.appendChild(commentDataBottomPost);
-  // commentDataRowBottom.appendChild(commentDataBottomCol);
-  // commentDataCol.appendChild(commentDataRowBottom);
-
-  // commentMainRow.appendChild(commentDataCol);
-
-  // commentSepCol.appendChild(commentSep);
-  // commentSepRow.appendChild(commentSepCol);
-
-  // comment.appendChild(commentMainRow);
-  // comment.appendChild(commentSepRow);
 
   comment.innerHTML = template;
 
@@ -386,7 +366,8 @@ function createComment(commentData) {
 }
 
 
-function addComment(postID, commentText) {
+function addComment(postID) {
+  var commentText = document.getElementById('new-comment').value;
 
   var d = new Date();
   var seconds = Math.round(d.getTime() / 1000);

@@ -30,17 +30,20 @@
 
         <div class="row mb-3">
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <div class="text-center d-block mb-4 h-100">
-              <img id="Reader-Profile-Picture" src="" alt="" class="rounded img-fluid">
+            <div class="text-center d-block mb-4">
+              <img id="Reader-Profile-Picture" src="" alt="" class="rounded img-fluid" style="max-height: 300px;">
             </div>
           </div>
         </div>
+
         <div class="row mb-5">
           <div class="col-md-12 text-center">
-            <h4 id="reader-name"></h4>
-            <h6 id="reader-email"></h6>
+            <h4 id="reader-name" class="helvetica-light"></h4>
+            <h6 id="reader-email" class="helvetica-light"></h6>
           </div>
         </div>
+
+
         <div class="row">
           <div class="col-md-12">
 
@@ -61,7 +64,7 @@
             </div>
             <div class="row">
               <div class="col mb-3">
-                <a class="btn-link" href="http://www.humanityhospice.com">About</a>
+                <a class="btn-link" href="http://www.humanityhospice.com">Humanity Hospice</a>
               </div>
             </div>
             <div class="row">
@@ -88,10 +91,10 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row my-3 sticky-top py-3" style="background-color: white;">
           <div class="col">
-            <div class="jumbotron">
-              <h3 class="display-4 text-center">
+            <div class="my-5">
+              <h3 class="display-4 text-left">
                 Switch Patients
               </h3>
             </div>
@@ -116,12 +119,6 @@
                   </tr>
                 </thead>
                 <tbody id="patientListBody">
-                  <tr>
-                    <td>Forrest Hull</td>
-                    <td>
-                      <button class="btn btn-purple">Select</button>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -154,7 +151,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="followPatient">Submit</button>
+          <button type="button" class="btn btn-purple" id="followPatient">Add Patient</button>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+var ReadingFrom;
+
 (function () {
 
     if (!firebase.apps.length) {
@@ -69,6 +71,7 @@
 
                 firebaseReader = fbuser;
                 currentAppUser = fbuser;
+                ReadingFrom = fbuser.ReadingFrom;
 
                 $("#reader-name").text(userdata.FullName);
                 $("#reader-email").text(user.email);
@@ -146,8 +149,14 @@ function createPatientListingRow(pid, uid) {
 
         td1.innerHTML = val.FullName;
 
-        btn.innerHTML = "Select";
-        btn.setAttribute('class', 'btn btn-purple');
+        if (pid == ReadingFrom) {
+            btn.innerHTML = "Selected";
+            btn.setAttribute('class', 'btn btn-outline-purple');
+        } else {
+            btn.innerHTML = "Select";
+            btn.setAttribute('class', 'btn btn-purple');
+        }
+
         btn.addEventListener('click', function() {
             switchPatientTo(pid, uid);
         });

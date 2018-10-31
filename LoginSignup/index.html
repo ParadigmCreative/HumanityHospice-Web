@@ -27,19 +27,23 @@
         <div class="row mb-2">
             <div class="col">
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required="true" autofocus="">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" autofocus="" required>
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col">
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required="true">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
             </div>
         </div>
 
-        <div id="invalid-text" class="invalid-feedback text-left">
-                Please enter patient's invite code
+        <div class="row">
+            <div class="col">
+                <div id="error-window" class="" role="alert">
+                    <!-- A simple danger alert—check it out! -->
+                </div>
+            </div>
         </div>
 
         <div class="row">
@@ -48,13 +52,51 @@
             </div>
         </div>
 
-        <div class="row my-5">
+        <div class="row mt-5">
             <div class="col text-center">
                 <a href="signup.html" style="color: #7572C1;">Don't have an account? Signup</a>
             </div>
         </div>
+        
+        <div class="row mt-2">
+            <div class="col text-center">
+                <a href="" style="color: #7572C1;" data-toggle="modal" data-target="#exampleModalCenter">Forgot your password? Click here.</a>
+            </div>
+        </div>
 
         <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Reset Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row my-4">
+                        <div class="col">
+                            <label for="inputPassReset" class="sr-only">Please enter your email</label>
+                            <input type="email" id="inputPassReset" class="form-control" placeholder="Email" name="inputPassReset" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="reset-result" class="" role="alert">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnPassReset" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 

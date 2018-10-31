@@ -75,7 +75,8 @@
         var profilePics = firebase.storage().ref().child("ProfilePictures");
         var imageRef = profilePics.child(user.uid).child('ProfilePicture.png');
         imageRef.getDownloadURL().then(function (url) {
-            $("#Reader-Profile-Picture").setAttribute('src', url);
+            $("#Reader-Profile-Picture").attr('src', url);
+            currentUserProfilePictureURL = url;
         }).catch(function (error) {
 
             // A full list of error codes is available at
@@ -170,8 +171,9 @@ function createPostRow(post) {
 
     rightCol.appendChild(nameRow);
 
-    var timestampH6 = document.createElement('h6');
+    var timestampH6 = document.createElement('p');
     timestampH6.id = "timestamp";
+    timestampH6.setAttribute('class', 'timestamp-font')
     var d = new Date(post.Timestamp * 1000);
     var options = {
         weekday: 'long',
