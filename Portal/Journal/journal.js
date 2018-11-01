@@ -133,10 +133,10 @@ function addPostRow(postData) {
   row.setAttribute('id', 'post-item-row');
 
   var leftData = document.createElement('div');
-  leftData.setAttribute('class', 'col-lg-1 col-md-3 col-sm-3 col-xs-4 mb-4');
+  leftData.setAttribute('class', 'col-lg-2 col-md-3 col-sm-3 col-xs-4 mb-4');
 
   var rightData = document.createElement('div');
-  rightData.setAttribute('class', 'col-lg-11 col-md-9 col-sm-9 col-xs-12');
+  rightData.setAttribute('class', 'col-lg-10 col-md-9 col-sm-9 col-xs-12');
 
   var profImg = document.createElement('img');
 
@@ -149,8 +149,22 @@ function addPostRow(postData) {
     }
   });
 
-  profImg.setAttribute('class', 'rounded, img-fluid');
-  leftData.appendChild(profImg);
+  var cropper = document.createElement('div');
+  cropper.setAttribute('class', 'image-cropper d-block');
+
+  var imgRow = document.createElement('div');
+  imgRow.setAttribute('class', 'row');
+  var imgCol1 = document.createElement('div');
+  imgCol1.setAttribute('class', 'col');
+  var imgCol2 = document.createElement('div');
+  imgCol2.setAttribute('class', 'col');
+
+  profImg.setAttribute('class', 'rounded profile-img img-fluid mx-auto');
+  cropper.appendChild(profImg);
+  imgRow.appendChild(imgCol1);
+  imgRow.appendChild(cropper);
+  imgRow.appendChild(imgCol2);
+  leftData.appendChild(imgRow);
 
   var nameRow = document.createElement('div');
   nameRow.setAttribute('class', 'row');
@@ -193,7 +207,7 @@ function addPostRow(postData) {
     img.setAttribute('class', 'img-fluid rounded mx-auto');
     img.id = "post-picture";
     img.setAttribute('src', postData.PostImageURL);
-    img.setAttribute('style', 'max-width: 300px; max-height: 300px;');
+    img.setAttribute('style', 'max-width: 300px; max-height: 300px; border-radius: 50%;');
     img.setAttribute('data-toggle', 'modal');
     img.setAttribute('data-target', '#imagemodal');
     img.addEventListener('click', function () {
@@ -201,6 +215,7 @@ function addPostRow(postData) {
       preview.attr('src', img.src);
     });
 
+  
     var col = document.createElement('div');
     col.setAttribute('class', 'col-xs-10 p-4');
     col.appendChild(img);
@@ -246,7 +261,7 @@ function addPostRow(postData) {
       </div> 
       <div class="row my-3">
         <div class="col-auto">
-          <button class="btn btn-purple" onclick="addComment(${postData.key})"> Post! </button> 
+          <button class="btn btn-purple" onclick="addComment('${postData.key}')"> Post! </button> 
         </div> 
       </div> 
     </div>
@@ -332,18 +347,24 @@ function createComment(commentData) {
   var template = `
     <div class="row">
       <div class = "col-lg-1 col-md-2 col-sm-2 col-xs">
-        <img class="img-fluid" src = "../../img/Logo.png" style="max-height: 300px;">
-      </div> 
+        <div class="row">
+          <div class="col"></div>
+            <div class="image-cropper mx-auto">
+              <img class="img-fluid profile-img" src = "../../img/Logo.png">
+            </div>
+          <div class="col"></div>
+        </div>
+      </div>
 
       <div class="col-lg-7 col-sm-6 col-sm-6 col-xs-10">
         <h4 id="commenter-name">${commentData.PosterName}</h4> 
       </div> 
       
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-        <hp id="timestamp" class="timestamp-font">${tm + " - " + dt}</hp> 
+        <p id="timestamp" class="timestamp-font">${tm + " - " + dt}</p> 
       </div> 
 
-      <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12 my-4">
+      <div class = "col-lg-12 col-md-12 col-sm-12 col-xs-12 m-3">
         <p id="comment-post">${commentData.Comment}</p> 
       </div> 
     </div> 

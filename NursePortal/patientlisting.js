@@ -21,6 +21,7 @@
     $("#nurse-name").text(nurse.FirstName + " " + nurse.LastName);
     $("#nurse-facetime").text(nurse.FacetimeID);
     $("#nurse-hangout").text(nurse.HangoutID);
+    $("#nurse-team").text(nurse.Team);
 
 
     getPatientList();

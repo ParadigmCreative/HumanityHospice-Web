@@ -21,84 +21,57 @@
 
 
     <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 collpase show width p-3 side-bar-content" id="sidebarmenu">
-                <div class="row mb-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <button class="btn btn-outline-light float-right" id="signout">Sign Out</button>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <div class="text-center d-block mb-4 h-100">
-                            <img src="" alt="" class="rounded img-fluid">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-md-12 text-center">
-                        <h2 class="display-4">Humanity Connect</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="row">
-                            <div class="col mb-3">
-                                <a class="btn-link" href="nurseportal.html">Portal Home</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+        <div class="row pt-4 px-5" style="background-color: #7572C1;">
+            <div class="col">
+                <a href="nurseportal.html" class="btn btn-outline-light" style="width:100px;">Back</a>
             </div>
-
-
-            <div class="col-xl col-lg col-md col-sm">
-                <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row mb-3 py-5 px-4" style="background-color: #7572C1;">
                     <div class="col-xl-12">
-                        <div class="row">
+                        <div class="row" style="color: white;">
                             <div class="col">
-                                <div class="jumbotron m-3">
+                                <div class="m-3">
                                     <h1 class="display-4" id="nurse-name"></h1>
                                     <p class="lead">
                                         <b>Facetime:</b> <span id="nurse-facetime"></span> <br>
-                                        <b>Google Hangout:</b> <span id="nurse-hangout"></span>
+                                        <b>Google Hangout:</b> <span id="nurse-hangout"></span> <br>
+                                        <b>Team:</b> <span id="nurse-team"></span>
                                     </p>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row my-3">
                             <div class="col">
-                                <div class="">
-                                    <button class="btn btn-purple float-right" id="assign-patient-btn" data-toggle="modal"
-                                        data-target="#assign-patient-popup">Assign Patient</button>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <button class="btn btn-outline-light float-right" style="width:125px;" id="signout">Sign Out</button>
+                                    </div>
+                                </div>
+                                <div class="row my-3">
+                                    <div class="col">
+                                        <div class="">
+                                            <button class="btn btn-outline-light float-right" style="width:125px;" id="assign-patient-btn" data-toggle="modal"
+                                                data-target="#assign-patient-popup">Assign Patient</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row mb-3 py-2 px-4">
+                    <div class="col">
+                        <table class="table" id="patient-list">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        <div class="row">
-                            <div class="col">
-                                <table class="table" id="patient-list">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-
-
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -120,7 +93,7 @@
                     <form>
 
                         <div class="form-group">
-                            <label for="patient-select">Team Select</label>
+                            <label for="patient-select">Select Patient</label>
                             <select class="form-control" id="patient-select">
 
                             </select>
@@ -130,8 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="submit-assign-patient" class="btn btn-primary" data-dismiss="modal">Save
-                        changes</button>
+                    <button type="button" id="submit-assign-patient" class="btn btn-primary" data-dismiss="modal">Add Patient</button>
                 </div>
             </div>
         </div>

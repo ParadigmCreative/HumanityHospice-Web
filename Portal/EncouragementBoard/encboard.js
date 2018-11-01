@@ -143,7 +143,7 @@ function createPostRow(post) {
 
     var img = document.createElement('img');
     img.setAttribute('src', "../../img/Logo.png");
-    img.setAttribute('class', 'rounded, img-fluid');
+    img.setAttribute('class', 'rounded profile-img img-fluid');
     leftCol.appendChild(img);
 
     // RIGHT POST COL

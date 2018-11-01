@@ -17,6 +17,20 @@ var selectedNurse;
         firebase.initializeApp(config);
     }
 
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user == null) {
+            location.href = "http://connect.humanityhospice.com";
+        } else {
+            if (user.uid != "pJR6aIo5o4WpnLlVXe7ZkwPDsl33") {
+                firebase.auth().signOut().then(function () {
+                    location.href = "http://connect.humanityhospice.com";
+                }).catch(function (error) {
+                    location.href = "http://connect.humanityhospice.com";
+                });
+            }
+        }
+    });
+
     var db = firebase.database().ref().child('Nurses');
     db.once('value').then(function (snap) {
 
@@ -45,43 +59,36 @@ var selectedNurse;
 
         });
 
-        var table = document.getElementById('Nurse-Table');
-        var thead = document.createElement('thead');
-        var tbody = document.createElement('tbody');
-
-        var theadrow = document.createElement('tr');
-        var theader1 = document.createElement('th');
-        var theader2 = document.createElement('th');
-
-        theader1.innerHTML = "Name";
-        theader2.innerHTML = "Status";
-
-        theadrow.appendChild(theader1);
-        theadrow.appendChild(theader2);
-
-        thead.appendChild(theadrow);
-        table.appendChild(thead);
+        var edmond = document.getElementById('edmond-team');
+        var guthrie = document.getElementById('guthrie-team');
+        
 
         nurses.forEach(function (nurse) {
-            var status = "";
-
             var tr = document.createElement('tr');
             tr.id = "nurse-row";
 
-            var td1 = document.createElement('td');
-            td1.id = "nurse-name";
-            td1.innerHTML = nurse.FirstName + " " + nurse.LastName;
+            var mKey = "manage-nurse" + nurse.ID;
+            var cKey = "change-nurse" + nurse.ID;
 
-            var link = document.createElement('a');
-            link.setAttribute('href', 'patientlisting.php');
+            var template = `
+                <td width="40%" id="nurse-name">${nurse.FirstName + " " + nurse.LastName}</td>
+                <td>
+                    <button id="${mKey}" class="btn btn-primary mx-2">Manage</button>
+                    <button id="${cKey}" class="btn btn-purple" type="button">On Call</button>
+                </td>
+            `
+            tr.innerHTML = template;
 
-            var td2 = document.createElement('td');
+            if (nurse.Team == "Guthrie") {
+                guthrie.appendChild(tr);
+            } else {
+                edmond.appendChild(tr);
+            }
 
-            var editbtn = document.createElement('button');
-            editbtn.setAttribute("id", "manage-nurse");
-            editbtn.innerHTML = "Manage";
-            editbtn.className = "btn btn-primary mx-2";
-            editbtn.addEventListener('click', function () {
+            var manage = document.getElementById(mKey);
+            var change = document.getElementById(cKey);
+
+            manage.addEventListener('click', function() {
                 var row = $(this).closest('tr#nurse-row');
                 var data = row.find("td#nurse-name");
                 var name = data.text();
@@ -94,14 +101,9 @@ var selectedNurse;
                 localStorage.setItem("selectedNurse", JSON.stringify(foundNurse));
 
                 window.location.href = "patientlisting.html";
-
             });
 
-            td2.appendChild(editbtn);
-
-            var btn = document.createElement('button');
-            btn.setAttribute("id", "change-status");
-            btn.addEventListener('click', function () {
+            change.addEventListener('click', function() {
                 $(this).toggleClass("btn-outline-purple");
 
                 var trow = $(this).closest('tr');
@@ -124,26 +126,14 @@ var selectedNurse;
             });
 
             if (nurse.OnCall) {
-                status = "On Call";
-                btn.className = "btn btn-purple";
+                change.innerHTML = "On Call";
+                change.className = "btn btn-purple";
             } else {
-                status = "Off Call";
-                btn.className = "btn btn-purple btn-outline-purple";
+                change.innerHTML = "Off Call";
+                change.className = "btn btn-purple btn-outline-purple";
             }
-            btn.setAttribute('type', 'button');
-            btn.innerHTML = status;
-
-
-            td2.appendChild(btn);
-
-            tr.appendChild(td1);
-            tr.appendChild(td2);
-
-            tbody.appendChild(tr);
 
         });
-
-        table.appendChild(tbody);
 
     });
 
