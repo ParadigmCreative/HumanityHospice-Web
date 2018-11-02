@@ -90,7 +90,7 @@ var ReadingFrom;
             var profilePics = firebase.storage().ref().child("ProfilePictures");
             var imageRef = profilePics.child(user.uid).child('ProfilePicture.png');
             imageRef.getDownloadURL().then(function (url) {
-                $("#Reader-Profile-Picture").setAttribute('src', url);
+                $("#Reader-Profile-Picture").attr('src', url);
             }).catch(function (error) {
 
                 // A full list of error codes is available at

@@ -133,10 +133,10 @@ function addPostRow(postData) {
   row.setAttribute('id', 'post-item-row');
 
   var leftData = document.createElement('div');
-  leftData.setAttribute('class', 'col-lg-2 col-md-3 col-sm-3 col-xs-4 mb-4');
+  leftData.setAttribute('class', 'col-lg-1 col-md-3 col-sm-3 col-xs-4 mb-4');
 
   var rightData = document.createElement('div');
-  rightData.setAttribute('class', 'col-lg-10 col-md-9 col-sm-9 col-xs-12');
+  rightData.setAttribute('class', 'col-lg-11 col-md-9 col-sm-9 col-xs-12');
 
   var profImg = document.createElement('img');
 
@@ -151,6 +151,7 @@ function addPostRow(postData) {
 
   var cropper = document.createElement('div');
   cropper.setAttribute('class', 'image-cropper d-block');
+  cropper.setAttribute('style', 'height: 100px!important; width: 100px!important;');
 
   var imgRow = document.createElement('div');
   imgRow.setAttribute('class', 'row');
@@ -207,7 +208,7 @@ function addPostRow(postData) {
     img.setAttribute('class', 'img-fluid rounded mx-auto');
     img.id = "post-picture";
     img.setAttribute('src', postData.PostImageURL);
-    img.setAttribute('style', 'max-width: 300px; max-height: 300px; border-radius: 50%;');
+    // img.setAttribute('style', '');
     img.setAttribute('data-toggle', 'modal');
     img.setAttribute('data-target', '#imagemodal');
     img.addEventListener('click', function () {
@@ -217,7 +218,8 @@ function addPostRow(postData) {
 
   
     var col = document.createElement('div');
-    col.setAttribute('class', 'col-xs-10 p-4');
+    col.setAttribute('class', 'col-xs-10 p-4 ');
+    col.setAttribute('style', 'width:300px; height:300px; overflow:hidden;');
     col.appendChild(img);
 
     var pimagerow = document.createElement('div');
@@ -235,6 +237,17 @@ function addPostRow(postData) {
 
   var commentsCol = document.createElement('div');
   commentsCol.setAttribute('class', 'col');
+
+  var commentsHeader = document.createElement('div');
+  commentsHeader.setAttribute('class', 'row my-2');
+
+  var commentsheaderTemplate = `
+    <div class="col">
+      <h4>Comments</h4>
+    </div>
+  `
+  commentsHeader.innerHTML = commentsheaderTemplate;
+  commentsCol.appendChild(commentsHeader);
 
   var commentsBorder = document.createElement('div');
   commentsBorder.setAttribute('class', 'comments rounded');
@@ -272,38 +285,7 @@ function addPostRow(postData) {
 
   inputRow.innerHTML = inputTemplate;
 
-  // var inputCol1 = document.createElement('div');
-  // inputCol1.setAttribute('class', 'col-auto');
-  // var inputButton = document.createElement('button');
-  // inputButton.setAttribute('class', 'btn btn-purple');
-  // inputButton.innerHTML = "Post!";
-
-  // inputButton.addEventListener('click', function() {
-  //   var comText = document.getElementById('new-comment').value;
-  //   addComment(postData.key, comText);
-  // });
-
-  // var inputCol2 = document.createElement('div');
-  // inputCol2.setAttribute('class', 'col');
-  // var inputGroup = document.createElement('div');
-  // inputGroup.setAttribute('class', 'input-group');
-  // var input = document.createElement('textarea');
-  // input.setAttribute('class', 'form-control');
-  // input.setAttribute('type', 'text');
-  // input.setAttribute('id', 'new-comment');
-  // input.setAttribute('placeholder', 'Write your comment here...');
-
-
-  // inputCol1.appendChild(inputButton);
-  // inputRow.appendChild(inputCol1);
-
-  // inputGroup.appendChild(input);
-  // inputCol2.appendChild(inputGroup);
-  // inputRow.appendChild(inputCol2);
-
   rightData.appendChild(inputRow);
-
-  //    asdfasdf
 
   row.appendChild(leftData);
   row.appendChild(rightData);
@@ -349,7 +331,7 @@ function createComment(commentData) {
       <div class = "col-lg-1 col-md-2 col-sm-2 col-xs">
         <div class="row">
           <div class="col"></div>
-            <div class="image-cropper mx-auto">
+            <div class="image-cropper-post mx-auto" style="height: 70px!important; width: 70px!important;">
               <img class="img-fluid profile-img" src = "../../img/Logo.png">
             </div>
           <div class="col"></div>
@@ -357,7 +339,7 @@ function createComment(commentData) {
       </div>
 
       <div class="col-lg-7 col-sm-6 col-sm-6 col-xs-10">
-        <h4 id="commenter-name">${commentData.PosterName}</h4> 
+        <h5 id="commenter-name">${commentData.PosterName}</h5> 
       </div> 
       
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">

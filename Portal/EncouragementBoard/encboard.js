@@ -141,10 +141,15 @@ function createPostRow(post) {
     var leftCol = document.createElement('div');
     leftCol.setAttribute('class', 'col-xl-1 col-lg-2 col-md-3 col-sm-3 col-4 mb-4');
 
+    var cropper = document.createElement('div');
+    cropper.setAttribute('style', 'height: 70px!important; width: 70px!important;')
+
     var img = document.createElement('img');
     img.setAttribute('src', "../../img/Logo.png");
     img.setAttribute('class', 'rounded profile-img img-fluid');
-    leftCol.appendChild(img);
+    
+    cropper.appendChild(img);
+    leftCol.appendChild(cropper);
 
     // RIGHT POST COL
     var rightCol = document.createElement('div');

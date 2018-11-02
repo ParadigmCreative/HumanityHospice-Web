@@ -109,14 +109,16 @@ function getPhotos(readingFrom) {
 
 }
 
-
+var imageLinks = [];
 function createPhotoCol(photoURL) {
 
     var col = document.createElement('div');
     col.setAttribute('class', 'col-lg-3 col-md-4 col-sm-4 col-xs-12');
+    var urlStub = photoURL.substr(photoURL.length - 12);
+    var imgID = "photo-album-post-" + urlStub;
     const template = `
-        <div class = "text-center d-block mb-4 h-100" >
-            <img id="photoalbumpost" data-toggle="modal" data-target="#imagemodal" src = "${photoURL}" alt = "" class="rounded img-fluid" style="max-height: 300px; max-width: 300px;">
+        <div class = "text-center d-block mb-4 mx-auto p-2" style="max-width:300px; max-height:300px; overflow:hidden;" >
+            <img id="${imgID}" data-toggle="modal" data-target="#imagemodal" src = "${photoURL}" alt = "" class="rounded img-fluid">
         </div> 
     `
 
@@ -124,14 +126,14 @@ function createPhotoCol(photoURL) {
     var posts = document.getElementById('photoAlbumRow');
     posts.appendChild(col);
 
-    var img = document.getElementById('photoalbumpost');
-    // img.addEventListener('click', function () {
+    var img = document.getElementById(imgID);
+    img.addEventListener('click', function () {
         
-    //     var ClickTemplate = `<img src="${img.src}" id="imagePreview" class="img-fluid">`
+        var ClickTemplate = `<img src="${img.src}" id="imagePreview" class="img-fluid">`
 
-    //     var area = document.getElementById('modalArea');
-    //     area.innerHTML = ClickTemplate;
+        var area = document.getElementById('modalArea');
+        area.innerHTML = ClickTemplate;
 
-    // });
+    });
 
 }
