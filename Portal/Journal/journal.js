@@ -176,6 +176,26 @@ function addPostRow(postData) {
   var h3Name = document.createElement('h3');
   h3Name.setAttribute('class', 'text-left');
 
+  var date = new Date(postData.Timestamp * 1000);
+  var options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  var dtstring = date.toLocaleDateString("en-US", options);
+  var tmstring = date.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  var jtimestampdiv = document.createElement('div');
+  jtimestampdiv.setAttribute('class', 'col-lg-4 col-md-4 col-sm-4 col-xs-12');
+
+  var jtimestamp = `<p id="timestamp" class="timestamp-font">${tmstring + " - " + dtstring}</p>`
+  jtimestampdiv.innerHTML = jtimestamp;
+
+
   var bold = document.createElement('b');
   var span = document.createElement('span');
   span.setAttribute('class', 'patient-name');
@@ -185,6 +205,7 @@ function addPostRow(postData) {
   h3Name.appendChild(bold);
   nameCol.appendChild(h3Name);
   nameRow.appendChild(nameCol);
+  nameRow.appendChild(jtimestampdiv);
 
   rightData.appendChild(nameRow);
 
