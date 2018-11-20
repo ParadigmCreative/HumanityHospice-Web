@@ -23,6 +23,13 @@
     $("#nurse-hangout").text(nurse.HangoutID);
     $("#nurse-team").text(nurse.Team);
 
+    $("#n-first-name-update").val(nurse.FirstName);
+    $("#n-last-name-update").val(nurse.LastName);
+    $("#n-facetime-update").val(nurse.FacetimeID);
+    $("#n-hangout-update").val(nurse.HangoutID);
+    $("#n-team-select-update").val(nurse.Team);
+
+    listenForUpdates(nurse.ID);
 
     getPatientList();
     getAllPatientsInCurrentTeam();
@@ -40,6 +47,20 @@
 
     });
 
+    document.getElementById("submit-update-nurse").addEventListener('click', function() {
+        var first = $("#n-last-name-update").val();
+        var last = $("#n-first-name-update").val();
+        var facetime = $("#n-facetime-update").val();
+        var gmail = $("#n-hangout-update").val();
+        var team = $("#n-team-select-update").find(":selected").text();
+        udpateNurseData(first, last, facetime, gmail, team, nurse.ID);
+    });
+
+    document.getElementById('submit-delete-nurse').addEventListener('click', function() {
+        var db = firebase.database().ref();
+        db.child('Nurses').child(nurse.ID).set(null);
+        location.href = "nurseportal.html";
+    });
 
 
 }());
@@ -188,4 +209,28 @@ function assignPatientToNurse(pid) {
     db.child('Nurses').child(nurse.ID).child("Patients").child(pid).set(true);
 
     location.reload();
+}
+
+function udpateNurseData(first, last, facetime, hangouts, team, nid) {
+    var nurseData = {
+        FirstName: first,
+        LastName: last,
+        FacetimeID: facetime,
+        HangoutID: hangouts,
+        Team: team
+    };
+    
+    var db = firebase.database().ref();
+    db.child('Nurses').child(nid).update(nurseData);
+}
+
+function listenForUpdates(nid) {
+    var db = firebase.database().ref();
+    var updates = db.child('Nurses').child(nid).on('value', function (data) {
+        var nurseData = data.val();
+        $("#nurse-name").text(nurseData.FirstName + " " + nurseData.LastName);
+        $("#nurse-facetime").text(nurseData.FacetimeID);
+        $("#nurse-hangout").text(nurseData.HangoutID);
+        $("#nurse-team").text(nurseData.Team);
+    });
 }

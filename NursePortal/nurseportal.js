@@ -60,7 +60,7 @@ var selectedNurse;
         });
 
         var edmond = document.getElementById('edmond-team');
-        var guthrie = document.getElementById('guthrie-team');
+        var perry = document.getElementById('perry-team');
         
 
         nurses.forEach(function (nurse) {
@@ -79,8 +79,8 @@ var selectedNurse;
             `
             tr.innerHTML = template;
 
-            if (nurse.Team == "Guthrie") {
-                guthrie.appendChild(tr);
+            if (nurse.Team == "Perry") {
+                perry.appendChild(tr);
             } else {
                 edmond.appendChild(tr);
             }
